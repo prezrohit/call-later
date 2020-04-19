@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">CallLater</string>
+    <string name="app_name">Call Later</string>
+    <string name="string_name">Name</string>
+    <string name="string_number">Number</string>
+    <string name="string_add">Press + to add Contacts</string>
+    <string name="string_schedule">23 August 2019 - 12:00 PM</string>
+    <string name="string_contact_hint">Enter Number or Browse</string>
+    <string name="string_browse">Browse</string>
+    <string name="string_hint_date">23 August 2019</string>
+    <string name="string_hint_time">8:00 PM</string>
+    <string name="string_contact_name">Contact Name</string>
+    <string name="string_exit">Exit</string>
+    <string name="string_exit_message">Do you want Cancel Progress and Exit?</string>
+    <string name="string_yes">Yes</string>
+    <string name="string_no">No</string>
+    <string name="string_status">DONE</string>
 </resources>
