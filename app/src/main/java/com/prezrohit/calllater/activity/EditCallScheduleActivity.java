@@ -16,6 +16,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.prezrohit.calllater.R;
+import com.prezrohit.calllater.dao.ContactDao;
+import com.prezrohit.calllater.database.AppDatabase;
 import com.prezrohit.calllater.helper.DateTimeConverter;
 import com.prezrohit.calllater.helper.DateTimeHelper;
 import com.prezrohit.calllater.service.CallService;
@@ -99,9 +101,9 @@ public class EditCallScheduleActivity extends AppCompatActivity {
 		timerMinute = calendar.get(Calendar.MINUTE);
 
 		dateScheduled = DateTimeHelper.formatDate(scheduleDate.getDate() + " " + (scheduleDate.getMonth() + 1) + " " + (scheduleDate.getYear() + 1900));
-		timeScheduled = DateTimeHelper.convertTo12Hour(scheduleDate.getHours(), scheduleDate.getMinutes());
+		timeScheduled = DateTimeConverter.convertTo12Hour(scheduleDate.getHours(), scheduleDate.getMinutes());
 
-		callReceiverService = new CallReceiverService();
+		callReceiverService = new CallService();
 
 		setDateAtStart(scheduleDate.getYear() + 1900, scheduleDate.getMonth() + 1, scheduleDate.getDate());
 		setTimeAtStart(scheduleDate.getHours(), scheduleDate.getMinutes());
@@ -165,7 +167,7 @@ public class EditCallScheduleActivity extends AppCompatActivity {
 					timerHour = hourOfDay;
 					timerMinute = minute;
 
-					timeScheduled = DateTimeHelper.convertTo12Hour(hourOfDay, minute);
+					timeScheduled = DateTimeConverter.convertTo12Hour(hourOfDay, minute);
 					lblSelectedTime.setText(timeScheduled);
 				},
 				setHour,
@@ -193,7 +195,7 @@ public class EditCallScheduleActivity extends AppCompatActivity {
 		t.schedule(new TimerTask() {
 			public void run() {
 				if (contactDao.getContactById(id) != null) {
-					callReceiverService.call(getApplication(), contactDao.getContactById(id));
+					callReceiverService.prepareCall(getApplication(), contactDao.getContactById(id));
 				}
 			}
 		}, date);
